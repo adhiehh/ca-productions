@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone, ArrowRight } from "lucide-react";
+import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone } from "lucide-react";
 import logo from "@/assets/cap-logo.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
