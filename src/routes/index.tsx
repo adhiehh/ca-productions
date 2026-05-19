@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone } from "lucide-react";
 import logo from "@/assets/cap-logo.png";
+import wordmark from "@/assets/cap-wordmark.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
@@ -43,8 +44,7 @@ function Nav() {
     <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
       <nav className="glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-6 py-3">
         <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="CA Productions" className="h-8 w-auto" />
-          <span className="hidden sm:inline text-xs tracking-[0.3em] text-foreground/80 uppercase">CA Productions</span>
+          <img src={wordmark} alt="CA Productions" className="h-7 sm:h-8 w-auto" />
         </a>
         <ul className="hidden md:flex items-center gap-10">
           {links.map((l) => (
