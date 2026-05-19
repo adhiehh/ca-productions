@@ -24,7 +24,6 @@ const projects = [
   { names: "Muskan & Faizan", place: "Udaipur, India", img: w1 },
   { names: "Anamika & Shirin", place: "Goa, India", img: w2 },
   { names: "Riya & Arjun", place: "Jaipur, India", img: w3 },
-  { names: "Sara & Kabir", place: "Kerala, India", img: w4 },
 ];
 
 const services = [
