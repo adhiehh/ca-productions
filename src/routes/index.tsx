@@ -5,7 +5,7 @@ import logo from "@/assets/cap-logo.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
-import w4 from "@/assets/wedding-4.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
