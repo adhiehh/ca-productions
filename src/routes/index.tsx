@@ -44,7 +44,9 @@ function Nav() {
     <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
       <nav className="glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-6 py-3">
         <a href="#" className="flex items-center gap-2">
-          <img src={wordmark} alt="CA Productions" className="h-7 sm:h-8 w-auto" />
+          <span className="font-serif text-lg sm:text-xl tracking-[0.25em] text-foreground">
+            CA <span className="text-accent">PRODUCTIONS</span>
+          </span>
         </a>
         <ul className="hidden md:flex items-center gap-10">
           {links.map((l) => (
