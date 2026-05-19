@@ -230,14 +230,35 @@ function Contact() {
   );
 }
 
+function FloatingWhatsApp() {
+  return (
+    <a
+      href="https://wa.me/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Message us on WhatsApp"
+      className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-5 py-3.5 shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] hover:scale-[1.05] active:scale-95 transition-transform"
+    >
+      <MessageCircle size={20} strokeWidth={2} />
+      <span className="hidden sm:inline text-sm tracking-wide font-medium">Message</span>
+    </a>
+  );
+}
+
 function Index() {
   return (
-    <main className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Nav />
-      <Hero />
-      <Projects />
-      <Why />
-      <Contact />
+    <main className="relative min-h-screen text-foreground overflow-x-hidden">
+      <VideoBackdrop />
+      <div className="relative z-10">
+        <Nav />
+        <Hero />
+        <div className="bg-gradient-to-b from-background/70 via-background/90 to-background/95 backdrop-blur-sm">
+          <Projects />
+          <Why />
+          <Contact />
+        </div>
+      </div>
+      <FloatingWhatsApp />
     </main>
   );
 }
