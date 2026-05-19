@@ -80,41 +80,37 @@ function Nav() {
   );
 }
 
-function Hero() {
+function VideoBackdrop() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <>
       <video
         autoPlay muted loop playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+        className="fixed inset-0 z-0 h-full w-full object-cover"
         src="/hero.mp4"
         poster={w1}
       />
-      <div className="absolute inset-0 bg-black/55" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background" />
+      <div className="fixed inset-0 z-[1] bg-black/55" />
+    </>
+  );
+}
 
+function Hero() {
+  return (
+    <section className="relative h-screen w-full overflow-hidden">
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        <span className="text-[11px] uppercase tracking-[0.5em] text-foreground/60 mb-6">Wedding Films · Est. India</span>
-        <h1 className="max-w-4xl text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight">
-          Unveiling the <span className="font-serif-italic text-accent">art</span> of you together
-        </h1>
-        <p className="mt-6 max-w-xl text-sm sm:text-base text-foreground/70 leading-relaxed">
-          Cinematic stories, captured with quiet intention — for the rarest day of your life.
+        <img src={logo} alt="CA Productions" className="w-[min(80vw,560px)] h-auto drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)]" />
+        <p className="mt-6 max-w-xl text-sm sm:text-base text-foreground/80 tracking-wide">
+          Unveiling art of you together
         </p>
-        <a
-          href="#projects"
-          className="mt-10 group inline-flex items-center gap-3 glass rounded-full px-7 py-3.5 text-sm tracking-widest uppercase hover:scale-[1.03] active:scale-95 transition-transform duration-300"
-        >
-          View Our Stories
-          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-        </a>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-[10px] tracking-[0.4em] uppercase text-foreground/40 animate-pulse">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-[10px] tracking-[0.4em] uppercase text-foreground/60 animate-pulse">
         Scroll
       </div>
     </section>
   );
 }
+
 
 function Projects() {
   return (
