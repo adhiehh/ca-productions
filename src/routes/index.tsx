@@ -127,14 +127,14 @@ function Projects() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           {projects.map((p, i) => (
             <Link
               key={p.names}
               to={`/projects/${p.slug}`}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className={`group relative block overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-[1.02] ${
-                i === 0 ? "h-[280px] sm:h-[380px] lg:h-[500px] lg:col-span-1 lg:row-span-1"
+                i === 0 ? "h-[280px] sm:h-[380px] lg:h-[500px]"
                 : i === 1 ? "h-[280px] sm:h-[320px] lg:h-[500px]"
                 : i === 2 ? "h-[280px] sm:h-[320px] lg:h-[500px]"
                 : "h-[280px] sm:h-[380px] lg:h-[500px]"
