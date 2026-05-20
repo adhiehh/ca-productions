@@ -74,27 +74,26 @@ function VideoBackdrop() {
 
   return (
     <>
+      {!videoLoaded && (
+        <div className="fixed inset-0 z-0 h-full w-full bg-black" />
+      )}
       <video
         autoPlay
         muted
         loop
         playsInline
         onCanPlay={() => setVideoLoaded(true)}
-        className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-500 ${
+        className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-700 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
         src="/hero.mp4"
-        poster={w1}
         preload="auto"
       />
       <div
-        className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-500 ${
+        className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-700 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
       />
-      {!videoLoaded && (
-        <div className="fixed inset-0 z-0 h-full w-full object-cover" style={{ backgroundImage: `url(${w1})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-      )}
     </>
   );
 }
