@@ -23,9 +23,9 @@ export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
     const project = projectsMap[params.slug];
     if (!project) throw notFound();
-    const gallery = Object.entries(galleryModules)
+    const gallery: string[] = Object.entries(galleryModules)
       .filter(([path]) => path.includes(`/projects/${project.folder}/`))
-      .map(([, url]) => url)
+      .map(([, url]) => url as string)
       .sort();
     return { project, gallery };
   },

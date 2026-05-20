@@ -23,10 +23,10 @@ export const Route = createFileRoute("/")({
 });
 
 const projects = [
-  { names: "Muskan & Faizan", place: "Udaipur, India", img: w1 },
-  { names: "Anamika & Shirin", place: "Goa, India", img: w2 },
-  { names: "Fatima & Summed", place: "Jaipur, India", img: w3 },
-  { names: "Irfan & Deepa", place: "Hyderabad, India", img: w4 },
+  { names: "Muskan & Faizan", slug: "muskan-faizan", img: w1 },
+  { names: "Anamika & Shirin", slug: "anamika-shirin", img: w2 },
+  { names: "Fatima & Summed", slug: "fatima-summed", img: w3 },
+  { names: "Irfan & Deepa", slug: "irfan-deepa", img: w4 },
 ];
 
 const services = [
