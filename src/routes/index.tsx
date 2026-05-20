@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone } from "lucide-react";
 import logo from "@/assets/cap-logo.png";
@@ -23,10 +23,10 @@ export const Route = createFileRoute("/")({
 });
 
 const projects = [
-  { names: "Muskan & Faizan", place: "Udaipur, India", img: w1 },
-  { names: "Anamika & Shirin", place: "Goa, India", img: w2 },
-  { names: "Fatima & Summed", place: "Jaipur, India", img: w3 },
-  { names: "Irfan & Deepa", place: "Hyderabad, India", img: w4 },
+  { names: "Muskan & Faizan", slug: "muskan-faizan", img: w1 },
+  { names: "Anamika & Shirin", slug: "anamika-shirin", img: w2 },
+  { names: "Fatima & Summed", slug: "fatima-summed", img: w3 },
+  { names: "Irfan & Deepa", slug: "irfan-deepa", img: w4 },
 ];
 
 const services = [
@@ -93,7 +93,7 @@ function VideoBackdrop() {
         src="/hero.mp4"
         poster={w1}
       />
-      <div className="fixed inset-0 z-[1] bg-black/55" />
+      <div className="fixed inset-0 z-[1] bg-black/35" />
     </>
   );
 }
@@ -134,9 +134,10 @@ function Projects() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {projects.map((p, i) => (
-            <a
+            <Link
               key={p.names}
-              href="#contact"
+              to="/projects/$slug"
+              params={{ slug: p.slug }}
               className={`group relative block overflow-hidden rounded-2xl ${i % 3 === 0 ? "sm:row-span-2 sm:h-[760px]" : "h-[420px]"}`}
             >
               <img
@@ -145,16 +146,15 @@ function Projects() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                 <p className="text-[10px] uppercase tracking-[0.4em] text-accent/90 mb-2">Wedding Story</p>
                 <h3 className="text-2xl md:text-3xl font-light tracking-tight">{p.names}</h3>
-                <p className="mt-1 text-xs text-foreground/60 tracking-wide">{p.place}</p>
               </div>
               <div className="absolute top-5 right-5 glass rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 View
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -256,7 +256,7 @@ function Index() {
       <div className="relative z-10">
         <Nav />
         <Hero />
-        <div className="bg-gradient-to-b from-background/70 via-background/90 to-background/95 backdrop-blur-sm">
+        <div className="bg-gradient-to-b from-background/60 via-background/80 to-background/90 backdrop-blur-sm">
           <Projects />
           <Why />
           <Contact />
