@@ -6,6 +6,7 @@ import wordmark from "@/assets/cap-wordmark.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
+import w4 from "@/assets/wedding-4.jpg";
 
 
 export const Route = createFileRoute("/")({
@@ -24,7 +25,8 @@ export const Route = createFileRoute("/")({
 const projects = [
   { names: "Muskan & Faizan", place: "Udaipur, India", img: w1 },
   { names: "Anamika & Shirin", place: "Goa, India", img: w2 },
-  { names: "Riya & Arjun", place: "Jaipur, India", img: w3 },
+  { names: "Fatima & Summed", place: "Jaipur, India", img: w3 },
+  { names: "Irfan & Deepa", place: "Hyderabad, India", img: w4 },
 ];
 
 const services = [
