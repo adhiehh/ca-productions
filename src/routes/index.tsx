@@ -93,7 +93,7 @@ function VideoBackdrop() {
         src="/hero.mp4"
         poster={w1}
       />
-      <div className="fixed inset-0 z-[1] bg-black/55" />
+      <div className="fixed inset-0 z-[1] bg-black/35" />
     </>
   );
 }
