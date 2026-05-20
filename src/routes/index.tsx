@@ -108,9 +108,6 @@ function Hero() {
         </p>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-[10px] tracking-[0.4em] uppercase text-foreground/60 animate-pulse">
-        Scroll
-      </div>
     </section>
   );
 }
