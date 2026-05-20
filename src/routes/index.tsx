@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone } from "lucide-react";
+import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone, Instagram } from "lucide-react";
 import logo from "@/assets/cap-logo.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
@@ -195,9 +195,10 @@ function Why() {
 
 function Contact() {
   const btns = [
-    { icon: MessageCircle, label: "WhatsApp Us", href: "https://wa.me/" },
-    { icon: Mail, label: "Send Email", href: "mailto:hello@caproductions.in" },
-    { icon: Phone, label: "Call Us", href: "tel:+910000000000" },
+    { icon: Mail, label: "Email", href: "mailto:caproductionsweddings@gmail.com" },
+    { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/917034712181" },
+    { icon: Phone, label: "Call", href: "tel:+917034712181" },
+    { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/caproductions__/" },
   ];
   return (
     <footer id="contact" className="relative py-32 px-6 border-t border-border/50">
@@ -237,7 +238,7 @@ function Contact() {
 function FloatingWhatsApp() {
   return (
     <a
-      href="https://wa.me/"
+      href="https://wa.me/917034712181"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
