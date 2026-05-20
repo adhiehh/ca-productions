@@ -256,7 +256,7 @@ function Index() {
       <div className="relative z-10">
         <Nav />
         <Hero />
-        <div className="bg-gradient-to-b from-background/70 via-background/90 to-background/95 backdrop-blur-sm">
+        <div className="bg-gradient-to-b from-background/60 via-background/80 to-background/90 backdrop-blur-sm">
           <Projects />
           <Why />
           <Contact />
