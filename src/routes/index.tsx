@@ -133,7 +133,7 @@ function Projects() {
               key={p.names}
               to={`/projects/${p.slug}`}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className={`group relative block overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-[1.02] ${i % 3 === 0 ? "sm:row-span-2 sm:h-[760px]" : "h-[420px]"}`}
+              className={`group relative block overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-[1.02] h-[280px] sm:h-auto ${i % 3 === 0 ? "sm:row-span-2 sm:h-[760px]" : "sm:h-[420px]"}`}
             >
               <img
                 src={p.img}
