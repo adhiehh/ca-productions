@@ -79,7 +79,7 @@ function ProjectDetail() {
             </p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {gallery.map((src, i) => (
+              {gallery.map((src: string, i: number) => (
                 <img
                   key={src}
                   src={src}
