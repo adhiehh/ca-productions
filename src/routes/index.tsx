@@ -25,7 +25,8 @@ export const Route = createFileRoute("/")({
 const projects = [
   { names: "Muskan & Faizan", place: "Udaipur, India", img: w1 },
   { names: "Anamika & Shirin", place: "Goa, India", img: w2 },
-  { names: "Riya & Arjun", place: "Jaipur, India", img: w3 },
+  { names: "Fatima & Summed", place: "Jaipur, India", img: w3 },
+  { names: "Irfan & Deepa", place: "Hyderabad, India", img: w4 },
 ];
 
 const services = [
