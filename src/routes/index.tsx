@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone } from "lucide-react";
 import logo from "@/assets/cap-logo.png";
