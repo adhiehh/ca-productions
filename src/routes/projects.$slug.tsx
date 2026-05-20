@@ -1,11 +1,12 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
+import { imageSizes } from "@/lib/image-utils";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
 import w4 from "@/assets/wedding-4.jpg";
 
-// Auto-load any images dropped into src/assets/projects/{slug}/
 const galleryModules = import.meta.glob("@/assets/projects/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
   eager: true,
   query: "?url",
@@ -19,32 +20,30 @@ const projectsMap: Record<string, { names: string; cover: string; folder: string
   "irfan-deepa": { names: "Irfan & Deepa", cover: w4, folder: "irfan-deepa" },
 };
 
-export const Route = createFileRoute("/projects/$slug")({
-  loader: ({ params }) => {
-    const project = projectsMap[params.slug];
-    if (!project) throw notFound();
-    const gallery: string[] = Object.entries(galleryModules)
+export default function ProjectDetail() {
+  const { slug } = useParams<{ slug: string }>();
+
+  const project = projectsMap[slug || ""];
+  const gallery = useMemo(() => {
+    if (!project) return [];
+    return Object.entries(galleryModules)
       .filter(([path]) => path.includes(`/projects/${project.folder}/`))
       .map(([, url]) => url as string)
       .sort();
-    return { project, gallery };
-  },
-  head: ({ params }) => {
-    const p = projectsMap[params.slug];
-    const title = p ? `${p.names} — CA Productions` : "Project — CA Productions";
-    return { meta: [{ title }, { name: "description", content: `Wedding story of ${p?.names ?? ""}` }] };
-  },
-  errorComponent: ({ error }) => (
-    <div className="min-h-screen flex items-center justify-center text-foreground">{error.message}</div>
-  ),
-  notFoundComponent: () => (
-    <div className="min-h-screen flex items-center justify-center text-foreground">Project not found</div>
-  ),
-  component: ProjectDetail,
-});
+  }, [project, slug]);
 
-function ProjectDetail() {
-  const { project, gallery } = Route.useLoaderData();
+  useEffect(() => {
+    const title = project ? `${project.names} — CA Productions` : "Project — CA Productions";
+    document.title = title;
+  }, [project]);
+
+  if (!project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        Project not found
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -61,7 +60,12 @@ function ProjectDetail() {
       </div>
 
       <section className="relative h-[70vh] w-full overflow-hidden">
-        <img src={project.cover} alt={project.names} className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={project.cover}
+          alt={project.names}
+          loading="eager"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-background" />
         <div className="relative z-10 flex h-full flex-col items-center justify-end pb-20 px-6 text-center">
           <span className="text-[11px] uppercase tracking-[0.4em] text-accent">Wedding Story</span>
@@ -85,6 +89,7 @@ function ProjectDetail() {
                   src={src}
                   alt={`${project.names} ${i + 1}`}
                   loading="lazy"
+                  sizes={imageSizes}
                   className={`w-full h-auto rounded-2xl object-cover ${i % 3 === 0 ? "sm:col-span-2" : ""}`}
                 />
               ))}

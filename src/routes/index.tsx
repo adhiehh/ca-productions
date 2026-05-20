@@ -1,26 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone } from "lucide-react";
 import logo from "@/assets/cap-logo.png";
-import wordmark from "@/assets/cap-wordmark.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
 import w4 from "@/assets/wedding-4.jpg";
-
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "CA Productions — Unveiling the art of you together" },
-      { name: "description", content: "Premium wedding film and photography agency crafting cinematic stories with bespoke design, trusted networks, and flawless execution." },
-      { property: "og:title", content: "CA Productions — Wedding Films & Photography" },
-      { property: "og:description", content: "Cinematic wedding films and editorial photography." },
-      { property: "og:type", content: "website" },
-    ],
-  }),
-  component: Index,
-});
 
 const projects = [
   { names: "Muskan & Faizan", slug: "muskan-faizan", img: w1 },
@@ -107,11 +92,9 @@ function Hero() {
           Unveiling art of you together
         </p>
       </div>
-
     </section>
   );
 }
-
 
 function Projects() {
   return (
@@ -133,8 +116,7 @@ function Projects() {
           {projects.map((p, i) => (
             <Link
               key={p.names}
-              to="/projects/$slug"
-              params={{ slug: p.slug }}
+              to={`/projects/${p.slug}`}
               className={`group relative block overflow-hidden rounded-2xl ${i % 3 === 0 ? "sm:row-span-2 sm:h-[760px]" : "h-[420px]"}`}
             >
               <img
@@ -246,7 +228,11 @@ function FloatingWhatsApp() {
   );
 }
 
-function Index() {
+export default function Index() {
+  useEffect(() => {
+    document.title = "CA Productions — Unveiling the art of you together";
+  }, []);
+
   return (
     <main className="relative min-h-screen text-foreground overflow-x-hidden">
       <VideoBackdrop />
