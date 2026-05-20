@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { imageSizes } from "@/lib/image-utils";
 import w1 from "@/assets/wedding-1.jpg";
@@ -22,6 +22,7 @@ const projectsMap: Record<string, { names: string; cover: string; folder: string
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const [loaded, setLoaded] = useState(false);
 
   const project = projectsMap[slug || ""];
   const gallery = useMemo(() => {
@@ -35,6 +36,7 @@ export default function ProjectDetail() {
   useEffect(() => {
     const title = project ? `${project.names} — CA Productions` : "Project — CA Productions";
     document.title = title;
+    setLoaded(true);
   }, [project]);
 
   if (!project) {
@@ -46,7 +48,7 @@ export default function ProjectDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className={`min-h-screen bg-background text-foreground transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
         <nav className="glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-6 py-3">
           <Link to="/" className="inline-flex items-center gap-2 text-sm tracking-wider text-foreground/80 hover:text-foreground">

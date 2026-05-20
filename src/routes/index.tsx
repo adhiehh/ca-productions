@@ -70,15 +70,31 @@ function Nav() {
 }
 
 function VideoBackdrop() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
   return (
     <>
       <video
-        autoPlay muted loop playsInline
-        className="fixed inset-0 z-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        onCanPlay={() => setVideoLoaded(true)}
+        className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-500 ${
+          videoLoaded ? "opacity-100" : "opacity-0"
+        }`}
         src="/hero.mp4"
         poster={w1}
+        preload="auto"
       />
-      <div className="fixed inset-0 z-[1] bg-black/35" />
+      <div
+        className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-500 ${
+          videoLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {!videoLoaded && (
+        <div className="fixed inset-0 z-0 h-full w-full object-cover" style={{ backgroundImage: `url(${w1})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+      )}
     </>
   );
 }
@@ -117,7 +133,8 @@ function Projects() {
             <Link
               key={p.names}
               to={`/projects/${p.slug}`}
-              className={`group relative block overflow-hidden rounded-2xl ${i % 3 === 0 ? "sm:row-span-2 sm:h-[760px]" : "h-[420px]"}`}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className={`group relative block overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-[1.02] ${i % 3 === 0 ? "sm:row-span-2 sm:h-[760px]" : "h-[420px]"}`}
             >
               <img
                 src={p.img}
