@@ -100,24 +100,35 @@ function Nav() {
 
 function VideoBackdrop() {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
 
   return (
     <>
-      {!videoLoaded && <div className="fixed inset-0 z-0 h-full w-full bg-black" />}
+      {!videoLoaded && (
+        <div
+          className={`fixed inset-0 z-0 h-full w-full bg-black transition-opacity duration-500 ${
+            isBuffering ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
       <video
         autoPlay
         muted
         loop
         playsInline
-        onCanPlay={() => setVideoLoaded(true)}
-        className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-700 ${
+        onLoadStart={() => setIsBuffering(true)}
+        onCanPlay={() => {
+          setIsBuffering(false);
+          setVideoLoaded(true);
+        }}
+        className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-500 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
         src="/hero.mp4"
-        preload="metadata"
+        preload="auto"
       />
       <div
-        className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-700 ${
+        className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-500 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
       />
