@@ -82,4 +82,15 @@
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid color-mix(in oklab, white 14%, transparent);
   }
+  .masonry-grid {
+    display: flex;
+    width: auto;
+  }
+  .masonry-grid-column {
+    padding-left: 1rem;
+    background-clip: padding-box;
+  }
+  .masonry-grid-column > img {
+    margin-bottom: 1rem;
+  }
 }

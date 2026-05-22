@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { imageSizes } from "@/lib/image-utils";
+import MasonryGallery from "@/components/MasonryGallery";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
@@ -94,18 +94,7 @@ export default function ProjectDetail() {
               <code className="text-accent">src/assets/projects/{project.folder}/</code>
             </p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {gallery.map((src: string, i: number) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt={`${project.names} ${i + 1}`}
-                  loading="lazy"
-                  sizes={imageSizes}
-                  className={`w-full h-auto rounded-2xl object-cover ${i % 3 === 0 ? "sm:col-span-2" : ""}`}
-                />
-              ))}
-            </div>
+            <MasonryGallery images={gallery} projectName={project.names} />
           )}
         </div>
       </section>
