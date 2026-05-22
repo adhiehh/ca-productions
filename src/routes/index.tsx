@@ -242,9 +242,9 @@ function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-5 py-3.5 shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] hover:scale-[1.05] active:scale-95 transition-transform"
+      className="fixed bottom-6 right-6 z-50 glass group inline-flex items-center gap-2 rounded-full px-5 py-3.5 text-foreground/90 hover:text-foreground shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_60px_-10px_rgba(0,0,0,0.4)] hover:scale-[1.05] active:scale-95 transition-all duration-300"
     >
-      <MessageCircle size={20} strokeWidth={2} />
+      <MessageCircle size={20} strokeWidth={1.5} className="text-accent group-hover:text-accent transition-colors" />
       <span className="hidden sm:inline text-sm tracking-wide font-medium">Message</span>
     </a>
   );
