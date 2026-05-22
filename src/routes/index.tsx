@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X, Sparkles, Users, Award, MessageCircle, Mail, Phone, Instagram } from "lucide-react";
+import {
+  Menu,
+  X,
+  Sparkles,
+  Users,
+  Award,
+  MessageCircle,
+  Mail,
+  Phone,
+  Instagram,
+} from "lucide-react";
 import logo from "@/assets/cap-logo.png";
 import w1 from "@/assets/wedding-1.jpg";
 import w2 from "@/assets/wedding-2.jpg";
@@ -15,9 +25,21 @@ const projects = [
 ];
 
 const services = [
-  { icon: Sparkles, title: "Bespoke Design", body: "Every story is sculpted with intention — from mood boards to the final frame, tailored entirely to you." },
-  { icon: Users, title: "Trusted Network", body: "A handpicked circle of cinematographers, editors and stylists who share an obsession for craft." },
-  { icon: Award, title: "Flawless Execution", body: "Calm on set, precise in post. We move quietly so your moments stay loud." },
+  {
+    icon: Sparkles,
+    title: "Bespoke Design",
+    body: "Every story is sculpted with intention — from mood boards to the final frame, tailored entirely to you.",
+  },
+  {
+    icon: Users,
+    title: "Trusted Network",
+    body: "A handpicked circle of cinematographers, editors and stylists who share an obsession for craft.",
+  },
+  {
+    icon: Award,
+    title: "Flawless Execution",
+    body: "Calm on set, precise in post. We move quietly so your moments stay loud.",
+  },
 ];
 
 function Nav() {
@@ -38,7 +60,10 @@ function Nav() {
         <ul className="hidden md:flex items-center gap-10">
           {links.map((l) => (
             <li key={l.label}>
-              <a href={l.href} className="text-sm tracking-wider text-foreground/70 hover:text-foreground transition-colors">
+              <a
+                href={l.href}
+                className="text-sm tracking-wider text-foreground/70 hover:text-foreground transition-colors"
+              >
                 {l.label}
               </a>
             </li>
@@ -57,7 +82,11 @@ function Nav() {
           <ul className="flex flex-col gap-4">
             {links.map((l) => (
               <li key={l.label}>
-                <a onClick={() => setOpen(false)} href={l.href} className="block text-sm tracking-wider text-foreground/80">
+                <a
+                  onClick={() => setOpen(false)}
+                  href={l.href}
+                  className="block text-sm tracking-wider text-foreground/80"
+                >
                   {l.label}
                 </a>
               </li>
@@ -74,9 +103,7 @@ function VideoBackdrop() {
 
   return (
     <>
-      {!videoLoaded && (
-        <div className="fixed inset-0 z-0 h-full w-full bg-black" />
-      )}
+      {!videoLoaded && <div className="fixed inset-0 z-0 h-full w-full bg-black" />}
       <video
         autoPlay
         muted
@@ -87,7 +114,7 @@ function VideoBackdrop() {
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
         src="/hero.mp4"
-        preload="auto"
+        preload="metadata"
       />
       <div
         className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-700 ${
@@ -102,7 +129,11 @@ function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        <img src={logo} alt="CA Productions" className="w-[min(80vw,560px)] h-auto drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)]" />
+        <img
+          src={logo}
+          alt="CA Productions"
+          className="w-[min(80vw,560px)] h-auto drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)]"
+        />
         <p className="mt-6 max-w-xl text-sm sm:text-base text-foreground/80 tracking-wide">
           Unveiling art of you together
         </p>
@@ -117,13 +148,16 @@ function Projects() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
-            <span className="text-[11px] uppercase tracking-[0.4em] text-accent">Selected Work</span>
+            <span className="text-[11px] uppercase tracking-[0.4em] text-accent">
+              Selected Work
+            </span>
             <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-light tracking-tight">
               Our <span className="font-serif-italic text-accent">Projects</span>
             </h2>
           </div>
           <p className="max-w-md text-sm text-foreground/60 leading-relaxed">
-            A small selection of recent wedding stories — each one a study in light, ritual, and tenderness.
+            A small selection of recent wedding stories — each one a study in light, ritual, and
+            tenderness.
           </p>
         </div>
 
@@ -132,12 +166,15 @@ function Projects() {
             <Link
               key={p.names}
               to={`/projects/${p.slug}`}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className={`group relative block overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-[1.02] ${
-                i === 0 ? "h-[280px] sm:h-[380px] lg:h-[500px]"
-                : i === 1 ? "h-[280px] sm:h-[320px] lg:h-[500px]"
-                : i === 2 ? "h-[280px] sm:h-[320px] lg:h-[500px]"
-                : "h-[280px] sm:h-[380px] lg:h-[500px]"
+                i === 0
+                  ? "h-[280px] sm:h-[380px] lg:h-[500px]"
+                  : i === 1
+                    ? "h-[280px] sm:h-[320px] lg:h-[500px]"
+                    : i === 2
+                      ? "h-[280px] sm:h-[320px] lg:h-[500px]"
+                      : "h-[280px] sm:h-[380px] lg:h-[500px]"
               }`}
             >
               <img
@@ -148,7 +185,9 @@ function Projects() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <p className="text-[10px] uppercase tracking-[0.4em] text-accent/90 mb-2">Wedding Story</p>
+                <p className="text-[10px] uppercase tracking-[0.4em] text-accent/90 mb-2">
+                  Wedding Story
+                </p>
                 <h3 className="text-2xl md:text-3xl font-light tracking-tight">{p.names}</h3>
               </div>
               <div className="absolute top-5 right-5 glass rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -184,7 +223,9 @@ function Why() {
                 <Icon size={20} strokeWidth={1.5} />
               </div>
               <h3 className="mt-8 text-xl font-light tracking-wide">{title}</h3>
-              <p className="mt-3 text-sm text-foreground/60 leading-relaxed tracking-wide">{body}</p>
+              <p className="mt-3 text-sm text-foreground/60 leading-relaxed tracking-wide">
+                {body}
+              </p>
             </div>
           ))}
         </div>
@@ -244,7 +285,11 @@ function FloatingWhatsApp() {
       aria-label="Message us on WhatsApp"
       className="fixed bottom-6 right-6 z-50 glass group inline-flex items-center gap-2 rounded-full px-5 py-3.5 text-foreground/90 hover:text-foreground shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_60px_-10px_rgba(0,0,0,0.4)] hover:scale-[1.05] active:scale-95 transition-all duration-300"
     >
-      <MessageCircle size={20} strokeWidth={1.5} className="text-accent group-hover:text-accent transition-colors" />
+      <MessageCircle
+        size={20}
+        strokeWidth={1.5}
+        className="text-accent group-hover:text-accent transition-colors"
+      />
       <span className="hidden sm:inline text-sm tracking-wide font-medium">Message</span>
     </a>
   );

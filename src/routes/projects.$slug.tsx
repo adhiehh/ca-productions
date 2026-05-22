@@ -7,11 +7,14 @@ import w2 from "@/assets/wedding-2.jpg";
 import w3 from "@/assets/wedding-3.jpg";
 import w4 from "@/assets/wedding-4.jpg";
 
-const galleryModules = import.meta.glob("@/assets/projects/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const galleryModules = import.meta.glob(
+  "@/assets/projects/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
 const projectsMap: Record<string, { names: string; cover: string; folder: string }> = {
   "muskan-faizan": { names: "Muskan & Faizan", cover: w1, folder: "muskan-faizan" },
@@ -31,7 +34,7 @@ export default function ProjectDetail() {
       .filter(([path]) => path.includes(`/projects/${project.folder}/`))
       .map(([, url]) => url as string)
       .sort();
-  }, [project, slug]);
+  }, [project]);
 
   useEffect(() => {
     const title = project ? `${project.names} — CA Productions` : "Project — CA Productions";
@@ -48,10 +51,15 @@ export default function ProjectDetail() {
   }
 
   return (
-    <main className={`min-h-screen bg-background text-foreground transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+    <main
+      className={`min-h-screen bg-background text-foreground transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+    >
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
         <nav className="glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-6 py-3">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm tracking-wider text-foreground/80 hover:text-foreground">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm tracking-wider text-foreground/80 hover:text-foreground"
+          >
             <ArrowLeft size={16} /> Back
           </Link>
           <span className="font-serif text-lg sm:text-xl tracking-[0.25em]">
@@ -72,7 +80,8 @@ export default function ProjectDetail() {
         <div className="relative z-10 flex h-full flex-col items-center justify-end pb-20 px-6 text-center">
           <span className="text-[11px] uppercase tracking-[0.4em] text-accent">Wedding Story</span>
           <h1 className="mt-4 text-5xl sm:text-6xl md:text-7xl font-light tracking-tight">
-            {project.names.split(" & ")[0]} <span className="font-serif-italic text-accent">&</span> {project.names.split(" & ")[1]}
+            {project.names.split(" & ")[0]} <span className="font-serif-italic text-accent">&</span>{" "}
+            {project.names.split(" & ")[1]}
           </h1>
         </div>
       </section>
@@ -81,7 +90,8 @@ export default function ProjectDetail() {
         <div className="mx-auto max-w-6xl">
           {gallery.length === 0 ? (
             <p className="text-center text-foreground/60 text-sm tracking-wide">
-              Images coming soon. Drop photos into <code className="text-accent">src/assets/projects/{project.folder}/</code>
+              Images coming soon. Drop photos into{" "}
+              <code className="text-accent">src/assets/projects/{project.folder}/</code>
             </p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
