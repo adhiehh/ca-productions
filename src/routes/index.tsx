@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Menu,
   X,
@@ -101,6 +101,26 @@ function Nav() {
 function VideoBackdrop() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Resume playback in case it was paused
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.log("Video autoplay prevented:", error);
+      });
+    }
+
+    return () => {
+      if (video) {
+        video.pause();
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -112,6 +132,7 @@ function VideoBackdrop() {
         />
       )}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
@@ -121,12 +142,20 @@ function VideoBackdrop() {
           setIsBuffering(false);
           setVideoLoaded(true);
         }}
+        onCanPlayThrough={() => setVideoLoaded(true)}
+        onError={(e) => {
+          console.error("Video error:", e);
+          setVideoLoaded(true);
+          setIsBuffering(false);
+        }}
         className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-500 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
-        src="/hero.mp4"
-        preload="auto"
-      />
+        preload="metadata"
+      >
+        <source src="/hero.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <div
         className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-500 ${
           videoLoaded ? "opacity-100" : "opacity-0"
