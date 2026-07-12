@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "optimize-videos": "node scripts/optimize-videos.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import {
+  getOptimalVideoQuality,
+  getVideoSource,
+  supportsWebM,
+  type VideoQuality,
+} from "@/lib/videoQuality";
+import {
   Menu,
   X,
   Sparkles,
@@ -101,13 +107,57 @@ function Nav() {
 function VideoBackdrop() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [quality, setQuality] = useState<VideoQuality>("hd");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Lazy load video using Intersection Observer
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          setQuality(getOptimalVideoQuality());
+          observer.disconnect();
+        }
+      },
+      { threshold: 0 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Handle responsive video quality changes via React state
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+
+    const handleResize = () => {
+      const newQuality = getOptimalVideoQuality();
+      setQuality((prev) => {
+        if (prev !== newQuality) {
+          return newQuality;
+        }
+        return prev;
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [shouldLoadVideo]);
+
+  // Handle video playback
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+
     const video = videoRef.current;
     if (!video) return;
 
-    // Resume playback in case it was paused
+    video.load();
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch((error) => {
@@ -120,48 +170,64 @@ function VideoBackdrop() {
         video.pause();
       }
     };
-  }, []);
+  }, [shouldLoadVideo, quality]);
+
+  const videoSources = shouldLoadVideo
+    ? getVideoSource(quality)
+    : { webm: "", mp4: "" };
+
+  const webmSupported = typeof window !== "undefined" && supportsWebM();
 
   return (
-    <>
-      {!videoLoaded && (
-        <div
-          className={`fixed inset-0 z-0 h-full w-full bg-black transition-opacity duration-500 ${
-            isBuffering ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      )}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        onLoadStart={() => setIsBuffering(true)}
-        onCanPlay={() => {
-          setIsBuffering(false);
-          setVideoLoaded(true);
-        }}
-        onCanPlayThrough={() => setVideoLoaded(true)}
-        onError={(e) => {
-          console.error("Video error:", e);
-          setVideoLoaded(true);
-          setIsBuffering(false);
-        }}
-        className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-500 ${
-          videoLoaded ? "opacity-100" : "opacity-0"
+    <div ref={containerRef}>
+      {/* Loading/Fallback Thumbnail Poster */}
+      <div
+        style={{ backgroundImage: "url('/hero-poster.png')" }}
+        className={`fixed inset-0 z-0 h-full w-full bg-cover bg-center transition-opacity duration-700 ${
+          videoLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
-        preload="metadata"
-      >
-        <source src="/hero.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      />
+      {shouldLoadVideo && (
+        <video
+          key={`${videoSources.webm}-${videoSources.mp4}`}
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-poster.png"
+          onLoadStart={() => setIsBuffering(true)}
+          onCanPlay={() => {
+            setIsBuffering(false);
+            setVideoLoaded(true);
+          }}
+          onCanPlayThrough={() => setVideoLoaded(true)}
+          onError={(e) => {
+            console.error("Video error:", e);
+            setVideoLoaded(true);
+            setIsBuffering(false);
+          }}
+          className={`fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-700 ${
+            videoLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          preload="auto"
+        >
+          {webmSupported && videoSources.webm && (
+            <source src={videoSources.webm} type="video/webm" />
+          )}
+          {videoSources.mp4 && (
+            <source src={videoSources.mp4} type="video/mp4" />
+          )}
+          <source src="/hero.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       <div
         className={`fixed inset-0 z-[1] bg-black/35 transition-opacity duration-500 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
       />
-    </>
+    </div>
   );
 }
 
